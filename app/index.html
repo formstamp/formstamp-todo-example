@@ -1,29 +1,63 @@
 <!doctype html>
-<html lang="en" ng-app="myApp">
+<html lang="en" ng-app="formstamp-todo-example">
 <head>
-  <meta charset="utf-8">
-  <title>My AngularJS App</title>
-  <link rel="stylesheet" href="css/app.css"/>
+<meta charset="utf-8">
+<title>My AngularJS App</title>
+<link rel="stylesheet" href="css/app.css"/> 
+<link rel="stylesheet" href="lib/bootstrap/bootstrap.min.css"/> 
+<link rel="stylesheet" href="lib/formstamp/formstamp.css"/> 
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
 
-  <div ng-view></div>
+<div class="container">
+  <div class="page-header">
+    <h1>Formstamp Todo Example</h1>
+  </div>
+  <div ng-controller='TodoController'>
+    <h2>
+      TODOs
+      <a class='btn btn-primary' ng-click='showForm = true'>New Task</a>
+    </h2>
+    <ul class='list-group'>
+      <li class="list-group-item" ng-repeat='todo in todos'>
+        <b> {{todo.title}} </b>
+        [
+        <span> Assigned to: {{todo.assignTo}} </span>
+        ]
+      </li>
+    </ul>
+    <fs-form-for model="todo" ng-show='showForm'>
+      <legend>New Task</legend>
+      <fs-input as="text" name="title" required="" label="Title"></fs-input>
+      <fs-input as="text" name="shortDescription" required="" label="Short Description"></fs-input>
+      <fs-row label="Start/End date">
+        <div class='row'>
+          <div class='col-xs-3'>
+            <div fs-date ng-model='todo.startDate'></div>
+          </div>
+          <div class='col-xs-3'>
+            <div fs-date ng-model='todo.endDate'></div>
+          </div>
+        </div>
+      </fs-row>
+      <fs-input as="fs-select" name="assignTo" label="Assign to" items='users' freetext="true">{{item}}</fs-input>
+      <fs-input as="fs-multiselect" name="watchers" label="Watchers" items='users' freetext="true">{{item}}</fs-input>
+      <fs-input as="fs-checkbox" name="labels" label="Labels" items="labels">{{item}}</fs-input>
 
-  <div>Angular seed app: v<span app-version></span></div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <a class="btn btn-primary" ng-click='addTodo()'>Save</a>
+          <a class="btn btn-default" ng-click='showForm = false'>Cancel</a>
+        </div>
+      </div>
+    </fs-form-for>
+  </div>
+</div>
 
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="lib/angular/angular.js"></script>
-  <script src="lib/angular/angular-route.js"></script>
-  <script src="js/app.js"></script>
-  <script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
-  <script src="js/filters.js"></script>
-  <script src="js/directives.js"></script>
+<script src="lib/jquery/jquery-2.1.0.min.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular/angular-route.js"></script>
+<script src="lib/formstamp/formstamp.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
