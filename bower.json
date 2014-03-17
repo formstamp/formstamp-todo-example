@@ -1,0 +1,20 @@
+{
+  "name": "formstamp-todo-demo",
+  "version": "0.0.0",
+  "homepage": "https://github.com/formstamp/formstamp-todo-example",
+  "authors": [
+    "Serzh Nechyporchuk <nechyporchuk@gmail.com>"
+  ],
+  "dependencies": {
+    "angular-formstamp": "latest"
+  },
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/bower_components",
+    "test",
+    "tests"
+  ]
+}
